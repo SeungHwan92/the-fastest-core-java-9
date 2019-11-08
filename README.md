@@ -32,3 +32,27 @@ i 변수의 유효 범위가 전체 루프이기 때문에 캡처 X , arg 변수
  ```
  compareIndirection(1) -> 오름차순
  compareIndirection(-1) -> 내림차순
+
+4.? EUNM 열거
+eunm name 값으로 찾을 때 valueOf 사용
+``` java
+public Optional<NotificationEvent> test(String sendType){
+        Optional<NotificationEvent> possible = Enums.getIfPresent(NotificationEvent.class, sendType);
+        if (!possible.isPresent()) {
+            throw new IllegalArgumentException("? There is no such planet!");
+        }
+        System.out.println(possible.get().name());
+        return possible;
+    }
+
+    public NotificationEvent test2(String sendType){
+        NotificationEvent possible = NotificationEvent.valueOf(sendType);
+        NotificationEventDetail notificationEventDetail = NotificationEvent.valueOf(NotificationEventDetail.class, sendType);
+        System.out.println(notificationEventDetail.name());
+        if (possible == null) {
+            return NotificationEvent.NONE;
+        }
+        System.out.println(possible.name());
+        return possible;
+    }
+```
